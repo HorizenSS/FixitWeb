@@ -1,0 +1,83 @@
+{% extends 'Front.html.twig' %}
+
+{% block container %}
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+          integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+          crossorigin=""/>
+
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+            crossorigin=""></script>
+    <script>
+
+
+        navigator.geolocation.getCurrentPosition(function (location) {
+
+            var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+            var mymap = L.map('mapid').setView(latlng, 13);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets',
+                accessToken: 'sk.eyJ1Ijoia2hsYXlpbCIsImEiOiJjanNoZWdhZTYwN2tqNDRwb2t6ZjVybzh2In0._qn3qxgVZ_Uo2VORkjkovA'
+            }).addTo(mymap);
+            var marker = L.marker(latlng).addTo(mymap);
+
+            function onMapClick(e) {
+
+
+                mymap.removeLayer(marker); // remove
+                marker = L.marker(e.latlng).addTo(mymap);
+                marker.bindPopup("<b>disponibilite</b><br>vous etes ici.").openPopup();
+                document.getElementById("zeinebbundle_disponibilite_lat").value = e.latlng.lat;
+                document.getElementById("zeinebbundle_disponibilite_lng").value = e.latlng.lng;
+
+            }
+
+            mymap.on('click', onMapClick);
+        });
+    </script>
+    {{ form_start(form) }}
+        <h4 class="main-title">contact us</h4>
+        <div class="about-inner-main">
+            <div class="col-md-6 contact-left">
+                <div class="agile-contact-top">
+                    <h4>address </h4>
+                    <p>choisisez l'adresse</p>
+                </div>
+                <div class="contact-bottom">
+                     <div  style="    width: 100%;
+    height: 335px;
+    padding-top: 15px;" id="mapid"></div>
+                </div>
+            </div>
+
+            <div class="col-md-6 w3layouts-reg-form contact-form-row-agileinfo">
+                <h4 class="form-con-txt">send us a mail</h4>
+                    <div class="contact-form-left contact-field1">
+                        <div class="sec-left">
+                            <label class="contact-form-text">Phone</label>
+                            {{ form_widget(form.numTelPro, {'attr': {'class': 'form-control' , 'placeholder' : 'Phone'}}) }}                        </div>
+                        <div class="sec-right">
+                            <label class="contact-form-text">Email</label>
+                            {{ form_widget(form.emailPro, {'attr': {'class': 'form-control' , 'placeholder' : 'email'}}) }}                        </div>
+                        <div class="sec-right">
+                            <label class="contact-form-text">Heur Debut</label>
+                            {{ form_widget(form.heurDebut, {'attr': {'class': 'form-control' , 'placeholder' : 'Heur Debut'}}) }}                        </div>
+                        <div class="sec-right">
+                            <label class="contact-form-text">Heur Fin</label>
+                            {{ form_widget(form.heurFin, {'attr': {'class': 'form-control' , 'placeholder' : 'Heur Fin'}}) }}           </div>
+                    </div>
+                    <div class="contact-form-right contact-field2">
+                        <input type="submit" value="valider">
+                    </div>
+                    <div class="clearfix"></div>
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    {{ form_end(form) }}
+
+{% endblock %}

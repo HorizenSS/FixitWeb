@@ -1,0 +1,32 @@
+{% extends 'Front.html.twig' %}
+
+{% block container %}
+    <h1>Convention </h1>
+    <div class="col-md-4 banner-btmg1">
+
+        <div class="form-text">
+            <h3>devenir partenaire de fixit?</h3>
+            <p>un service de qualite</p>
+            <img src="images/f1.png" alt="">
+        </div>
+        {{ form_start(form) }}
+
+            <div class="sec-left">
+                {{ form_widget(form.nomSoc,{'attr':{'placeholder':'nom de la societe'}}) }}
+            </div>
+            <div class="sec-left">
+                {{ form_widget(form.description,{'attr':{'placeholder':'Email'}}) }}
+
+            </div>
+            <div class="sec-left">
+                {{ form_widget(form.imgUrl) }}
+            </div>
+
+
+            <input type="submit" value="Submit">
+    </div>
+ 
+    {{ form_end(form) }}
+
+
+{% endblock %}

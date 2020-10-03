@@ -1,0 +1,21 @@
+{% extends 'Front.html.twig' %}
+
+{% block container %}
+    {% for dispo in disponibilites %}
+        <div class="main-bottom">
+            <div class="col-md-6 col-sm-6 mb-left">
+
+            </div>
+            <div class="col-md-6 col-sm-6 mb-right">
+                <h4>{{ dispo.user.username}}</h4>
+                <p><span>email :</span>{{ dispo.emailPro }}</p>
+                <p><span>telephone Pro :</span>{{ dispo.numTelPro  }}</p>
+                <p><span>heure debut :</span>{{ dispo.heurDebut | date("H : i") }}</p>
+                <p><span>heure fin :</span>{{ dispo.heurFin | date("H : i") }}</p>
+                <a href="{{ path('disponibilite_show',{'id':dispo.id}) }}">detail de la disponibilite</a>
+            </div>
+
+        </div>
+    {% endfor %}
+
+{% endblock %}

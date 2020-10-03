@@ -1,0 +1,19 @@
+{% extends 'Front.html.twig' %}
+
+{% block container %}
+
+        {% for convention in conventions %}
+                <div class="main-bottom">
+                    <div class="col-md-6 col-sm-6">
+                        <img src="{{ asset('uploads/'~ convention.imgUrl) }}" style="width: 100%;height: 100%">
+                    </div>
+                    <div class="col-md-6 col-sm-6 mb-right">
+                        <h4>{{ convention.nomSoc }}</h4>
+                        <p>{{ convention.description }}</p>
+                        <a href="{{ path('convention_show',{'id':convention.id}) }}">detail de la convention</a>
+                    </div>
+
+                </div>
+        {% endfor %}
+
+{% endblock %}

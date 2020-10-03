@@ -1,0 +1,32 @@
+{% extends 'Front.html.twig' %}
+
+{% block container %}
+
+<centre>
+    <div class="col-md-4 banner-btmg1">
+
+        <div class="form-text">
+            <h3>modifier les details de votre convention?</h3>
+            <p>si vous comfirmer les modifications l'admin devras comfirmer de les nouveaux termes</p>
+            <img src="images/f1.png" alt="">
+        </div>
+
+            {{ form_start(edit_form) }}
+            <div class="sec-left">
+                {{ form_widget(edit_form.nomSoc,{'attr':{'placeholder':'nom de la societe'}}) }}
+            </div>
+            <div class="sec-left">
+                {{ form_widget(edit_form.description,{'attr':{'placeholder':'Email'}}) }}
+
+            </div>
+            <div class="sec-left">
+                {{ form_widget(edit_form.imgUrl) }}
+            </div>            <input type="submit" value="Edit" />
+            {{ form_end(edit_form) }}
+
+
+    </div>
+
+</centre>
+
+{% endblock %}

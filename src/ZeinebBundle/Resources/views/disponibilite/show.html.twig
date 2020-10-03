@@ -1,0 +1,74 @@
+{% extends 'Front.html.twig' %}
+
+{% block container %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+          integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+          crossorigin=""/>
+
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+            crossorigin=""></script>
+
+
+    <h4 class="main-title">DISPONIBILIE</h4>
+    <div class="about-inner-main">
+        <div class="col-md-6 contact-left">
+            <div class="agile-contact-top">
+                <h4>address </h4>
+            </div>
+            <div class="contact-bottom">
+                <div  style="    width: 100%;
+    height: 335px;
+    padding-top: 15px;" id="mapid"></div>
+            </div>
+        </div>
+
+        <div class="col-md-6 w3layouts-reg-form contact-form-row-agileinfo">
+            <h4 class="form-con-txt">detail de la disponibilte</h4>
+            <form action="#" method="post" class="banner_form contact-inner-form">
+                <div class="contact-form-left contact-field1">
+                    <div class="sec-left">
+                        <label class="contact-form-text">Phone :</label>
+                      <p style="color: white">  {{ disponibilite.numTelPro }}                        </p></div>
+                    <div class="sec-right">
+                        <label class="contact-form-text">Email :</label>
+                        <p style="color: white">  {{ disponibilite.emailPro }}                    </p>     </div>
+                    <div class="sec-right">
+                        <label class="contact-form-text">Heur Debut :</label>
+                        <p style="color: white">  {{ disponibilite.heurDebut | date(" H : i")}}       </p>                 </div>
+                    <div class="sec-right">
+                        <label class="contact-form-text">Heur Fin :</label>
+                        <p style="color: white">  {{ disponibilite.heurFin | date(" H : i")}}       </p>     </div>
+                </div>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") and disponibilite.user != null %}
+                    {% if app.user.id == disponibilite.user.id %}
+                        <a class="btn-warning" href="{{ path('disponibilite_edit',{'id':disponibilite.id}) }}">modifier la convention</a>
+                        <a class="btn-danger" href="{{ path('disponibilite_delete',{'id':disponibilite.id}) }}">supprimer la convention</a>
+                    {% endif %}
+                {% endif %}
+                <div class="clearfix"></div>
+
+            </form>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+
+                            <p>Temp de travail<br>{{ disponibilite.heurDebut | date(" H : i")}}- {{ disponibilite.heurFin | date(" H : i")}}</p>
+
+    <script>
+
+
+        var mymap = L.map('mapid').setView([{{ disponibilite.lat }},{{ disponibilite.lng }}], 13);
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox.streets',
+            accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
+        }).addTo(mymap);
+
+        var marker = L.marker([{{ disponibilite.lat }},{{ disponibilite.lng }}]).addTo(mymap);
+
+    </script>
+    {{ socialButtons() }}
+{% endblock %}

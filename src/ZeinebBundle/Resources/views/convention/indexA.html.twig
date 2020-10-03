@@ -1,0 +1,75 @@
+{% extends 'Back.html.twig' %}
+
+{% block container %}
+    <div class="card">
+        <div class="card-header">
+            <h5>recherche par nom societe</h5>
+            <form method="post" action="{{ path('admin_convention_recherche') }}">
+                <input type="text" class="form-control" placeholder="recherche" name="recherche" id="recherche"/>
+
+            </form>
+        </div>
+        <div class="card-block table-border-style">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Date Creation</th>
+                        <th>nom utilisateur</th>
+                        <th>nom societe</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>image</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+    {% for convention in conventions %}
+
+
+        {% if convention.status == "pending" %}
+            <tr class="table-warning">
+            <th scope="row">{{ convention.id }}</th>
+            <td>{{ convention.createdAt | date }}</td>
+            <td>{{ convention.user.username }}</td>
+            <td>{{ convention.nomSoc }}</td>
+            <td>{{ convention.description }}</td>
+            <td>{{ convention.status }}</td>
+            <td>{{ convention.imgUrl }}</td>
+            <td><a class="btn btn-success" href="{{ path('convention_accepter',{'id':convention.id}) }}">accepter</a><a class="btn btn-danger" href="{{ path('convention_refuser',{'id':convention.id}) }}">refuser</a></td>
+
+        {% endif %}
+        {% if convention.status == "refused" %}
+            <tr class="table-danger">
+            <th scope="row">{{ convention.id }}</th>
+            <td>{{ convention.createdAt | date }}</td>
+            <td>{{ convention.user.username }}</td>
+            <td>{{ convention.nomSoc }}</td>
+            <td>{{ convention.description }}</td>
+            <td>{{ convention.status }}</td>
+            <td>{{ convention.imgUrl }}</td>
+
+        {% endif %}
+        {% if convention.status == "accepted" %}
+            <tr class="table-success">
+            <th scope="row">{{ convention.id }}</th>
+            <td>{{ convention.createdAt | date }}</td>
+            <td>{{ convention.user.username }}</td>
+            <td>{{ convention.nomSoc }}</td>
+            <td>{{ convention.description }}</td>
+            <td>{{ convention.status }}</td>
+            <td>{{ convention.imgUrl }}</td>
+
+        {% endif %}
+                    </tr>
+    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

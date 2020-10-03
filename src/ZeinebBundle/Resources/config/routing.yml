@@ -1,0 +1,77 @@
+
+disponibilite_index:
+    path:     /disponibilite
+    defaults: { _controller: ZeinebBundle:Disponibilite:index }
+
+disponibilite_tec:
+    path:     /disponibiliteTec
+    defaults: { _controller: ZeinebBundle:Disponibilite:disponibiliteTec }
+
+
+disponibilite_show:
+    path:     /disponibilite/show/{id}
+    defaults: { _controller: ZeinebBundle:Disponibilite:show }
+
+disponibilite_new:
+    path:     /disponibilite/add
+    defaults: { _controller: ZeinebBundle:Disponibilite:new }
+
+disponibilite_edit:
+    path:     /disponibilite/edit/{id}
+    defaults: { _controller: ZeinebBundle:Disponibilite:edit }
+
+disponibilite_delete:
+    path:     /disponibilite/delete/{id}
+    defaults: { _controller: ZeinebBundle:Disponibilite:delete }
+
+
+convention_index:
+    path:     /convention
+    defaults: { _controller: ZeinebBundle:Convention:index }
+
+convention_tec:
+    path:     /conventionTec
+    defaults: { _controller: ZeinebBundle:Convention:conventionTec }
+
+
+admin_convention_recherche:
+    path:     /admin/convention/recherche
+    defaults: { _controller: ZeinebBundle:Convention:rechercheParSoc }
+
+admin_convention_index:
+    path:     /admin/convention
+    defaults: { _controller: ZeinebBundle:Convention:indexAdmin }
+admin_convention_pending:
+    path:     /admin/convention/pending
+    defaults: { _controller: ZeinebBundle:Convention:indexPendingAdmin }
+
+admin_convention_accepted:
+    path:     /admin/convention/accepted
+    defaults: { _controller: ZeinebBundle:Convention:indexAcceptedAdmin}
+
+
+admin_convention_refused:
+    path:     /admin/convention/refused
+    defaults: { _controller: ZeinebBundle:Convention:indexRefusedAdmin}
+
+convention_show:
+    path:     /convention}/show/{id}
+    defaults: { _controller: ZeinebBundle:Convention:show }
+
+convention_new:
+    path:     /convention/add
+    defaults: { _controller: ZeinebBundle:Convention:new }
+
+convention_edit:
+    path:     /convention/edit/{id}
+    defaults: { _controller: ZeinebBundle:Convention:edit }
+
+convention_delete:
+    path:     /convention/delete/{id}
+    defaults: { _controller: ZeinebBundle:Convention:deleteConvention }
+convention_accepter:
+    path:     /convention/accepter/{id}
+    defaults: { _controller: ZeinebBundle:Convention:acceptConvention }
+convention_refuser:
+    path:     /convention/refuser/{id}
+    defaults: { _controller: ZeinebBundle:Convention:refuserConvention }
