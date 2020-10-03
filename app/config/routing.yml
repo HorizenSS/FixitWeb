@@ -1,0 +1,30 @@
+local:
+    resource: "@LocalBundle/Resources/config/routing.yml"
+    prefix:   /
+
+base:
+    resource: "@BaseBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+mgilet_notifications:
+    resource: "@MgiletNotificationBundle/Controller/"
+    prefix: /notifications
+
+zeineb:
+    resource: "@ZeinebBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
+
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
