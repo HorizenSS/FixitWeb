@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Ticket</title>
+    <style>
+        h2{
+            font-family: Brush Script MT, Brush Script Std, cursive
+        }
+        h1{
+            font-family: Brush Script MT, Brush Script Std, cursive
+        }
+        header {
+            color: #777777;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #AAAAAA;
+        }
+        footer {
+            color: #777777;
+            width: 100%;
+            height: 30px;
+            position: absolute;
+            bottom: 0;
+            border-top: 1px solid #AAAAAA;
+            padding: 8px 0;
+            text-align: center;
+        }
+        body {
+            position: relative;
+            width: 21cm;
+            height: 29.7cm;
+            margin: 0 auto;
+            color: #555555;
+            background: #FFFFFF;
+            font-size: 14px;
+            font-family: SourceSansPro;
+        }
+    </style>
+</head>
+<body>
+
+
+<header>
+    <div id="company">
+        <h2 style="color: #531A13" class="name" > <strong>Souk El Madina</strong> </h2>
+        <div>Site web :<a href="#">www.soukelmadina.com</a></div>
+        <div style="color: #777777">Numero de telephone :56 10 32 22</div>
+        <div>Email :<a href="mailto:company@example.com">soukelmadina@souk.tn</a></div>
+    </div>
+</header>
+
+<main>
+    <img src="http://localhost/medina/web/images/qr.png " />
+    <br><br>
+    <h1 style="text-align: center">Ticket de Mme/Mr "{{ user }} "</h1>
+    <br><br>
+    <div style="text-align: center ; color: #101010">
+        <h2>Evenement :<strong> {{ event.nom }} </strong> </h2>
+        <h2> Date : {{ event.date|date }} </h2>
+        <h2> Lieu : {{ event.lieu }} </h2>
+        <h2> Prix : {{ event.prix }}dt </h2>
+    </div>
+
+
+</main>
+
+<footer>
+     With   <img src="http://localhost/medina/web/images/heart.jpg"/>
+<br>
+     All rights reserved <strong>Souk El Madina</strong> 2017-2018.
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+{% extends 'Front.html.twig' %}
+
+{% block body %}
+
+    <!--suppress ALL, JSAnnotator -->
+    <style>
+
+        #customPopup
+        {
+            position: fixed;
+            display: none;
+            left: 50%;
+            top: 50%;
+            z-index: 2000;
+            padding: 20px;
+            width: 560px;
+            background-color: #EEEEEE;
+            font-size: 12px;
+            line-height: 16px;
+            color: #202020;
+            border : 3px outset #555555;
+        }
+    </style>
+    <!-- Button trigger modal -->
+   <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Afficher la liste
+    </button> -->
+
+    <script type="text/javascript">
+        $(window).on('load',function(){
+            $('#exampleModal').modal('show');
+        });
+    </script>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table table-striped table-hover">
+
+                        <h3 class="tittle1" >Liste des Participants </h3>
+
+                        <a href="{{ path('sandbox_pdfexamplePart',{'idEvent':event.idEvent}) }}" data-text="Imprimer la liste des participants" class="my-cart-b item_add">Imprimer la liste des participants</a>
+
+                        <table  class="table table-striped table-hover" style="font-size:170%"><thead>
+                            <tr>
+                                <th  style="color: #531A13 ; text-align: center"    >     Participants </th>
+                                <th  style="color: #531A13 ; text-align: center"    >     Email </th>
+                            </tr></thead>
+
+                            {% for participant in participants %}
+
+                                <tr>
+                                    <td style="text-align: center">{{ participant.getUser() }}</td>
+                                    <td style="text-align: center">{{ participant.getUser().getEmail() }}</td>
+                                </tr>
+
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+ <!--   <div id="customPopup">
+        <h3>Titre du popup</h3>
+        <p>Message du popup !</p>
+        <div class="table table-striped table-hover">
+
+            <h3 class="tittle1" >Liste des Participants </h3>
+
+            <a href="{{ path('sandbox_pdfexamplePart') }}" data-text="Imprimer la liste des participants" class="my-cart-b item_add">Imprimer la liste des participants</a>
+
+            <table  class="table table-striped table-hover" style="font-size:170%"><thead>
+                <tr>
+                    <th  style="color: #531A13 ; text-align: center"    >     Participants </th>
+                </tr></thead>
+
+                {% for participant in participants %}
+
+                    <tr>
+                        <td style="text-align: center">{{ participant.getUser() }}</td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+        </div>
+        <p> </p>
+        <input type="button" value="Ok" onclick="hidePopup();">
+    </div>
+
+
+
+        <a href="javascript:showPopup();" title="Montrer le popup">Popup !</a>
+        <script>
+            function showPopup() {
+
+                // ici on insère dans notre page html notre div gris
+                $("#customPopup").before('<div id="grayBack"></div>');
+
+                // maintenant, on récupère la largeur et la hauteur de notre popup
+                var popupH = $("#customPopup").height();
+                var popupW = $("#customPopup").width();
+
+                // ensuite, on crée des marges négatives pour notre popup, chacune faisant
+                // la moitié de la largeur/hauteur du popup
+                $("#customPopup").css("margin-top",  (popupH / 2 , 40) ,  "px");
+                $("#customPopup").css("margin-left",  ( popupW / 2),   "px");
+
+                // enfin, on fait apparaître en 300 ms notre div gris de fond, et une fois
+                // son apparition terminée, on fait apparaître en fondu notre popup
+                $("#grayBack").css('opacity', 0).fadeTo(300, 0.5, function () { $("#customPopup").fadeIn(500); });
+
+            }
+
+            function hidePopup() {
+
+                // on fait disparaître le gris de fond rapidement
+                $("#grayBack").fadeOut('fast', function () { $(this).remove() });
+
+                // on fait disparaître le popup à la même vitesse
+                $("#customPopup").fadeOut('fast', function () { $(this).hide() });
+
+            }
+        </script>
+
+
+<style>
+    #grayBack
+    {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        z-index: 1999;
+        opacity: 0.5;
+    }
+</style>
+-->
+<!--    <style>
+        .add {
+            background-color: #f4511e;
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            font-size: 16px;
+            margin: 4px 2px;
+            opacity: 0.6;
+            transition: 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .add:hover {opacity: 1}
+    </style>
+
+    <script>
+        function afficher() {
+            $('#myModal3').modal('show');
+            $('#label').text(document.getElementById("popup").name);
+            //   alert(document.getElementById("popup").name)
+
+        }
+    </script>
+
+    <div style="background-color: red">
+     {#   <p style="color: white">{{ MessageEvent }}</p>#}
+
+    </div>
+    <div class="table table-striped table-hover">
+
+        <h3 class="tittle1" >Liste des Participants </h3>
+
+            <a href="{{ path('sandbox_pdfexamplePart') }}" data-text="Imprimer la liste des participants" class="my-cart-b item_add">Imprimer la liste des participants</a>
+
+        <table  class="table table-striped table-hover" style="font-size:170%"><thead>
+            <tr>
+                <th  style="color: #531A13 ; text-align: center"    >     Participants </th>
+            </tr></thead>
+
+            {% for participant in participants %}
+
+                <tr>
+                    <td style="text-align: center">{{ participant.getUser() }}</td>
+                </tr>
+
+            {% endfor %}
+        </table>
+    </div> -->
+{% endblock %}

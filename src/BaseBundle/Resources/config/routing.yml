@@ -1,0 +1,60 @@
+base_homepage:
+    path:     /index
+    defaults: { _controller: BaseBundle:Default:index }
+
+dashbord:
+    path:     /admin
+    defaults: { _controller: BaseBundle:Default:dash }
+
+send-notification:
+    path:     /send-notification
+    defaults: { _controller: BaseBundle:Default:sendNotification }
+
+
+ajoutEvent:
+    path:     /ajoutEvent
+    defaults: { _controller: BaseBundle:Event:ajoutEvent }
+afficherEvent:
+    path:     /afficherEvent
+    defaults: { _controller: BaseBundle:Event:afficherEvent }
+detailEvent:
+    path:     /detailEvent
+    defaults: { _controller: BaseBundle:Event:detailEvent }
+updateEvent:
+    path:     /updateEvent/{id}
+    defaults: { _controller: BaseBundle:Event:updateEvent }
+deleteEvent:
+    path:     /deleteEvent
+    defaults: { _controller: BaseBundle:Event:deleteEvent }
+
+participation:
+    path:     /Participation
+    defaults: { _controller: BaseBundle:Participation:Participer }
+rechercheEvent:
+    path:     /rechercheEvent
+    defaults: { _controller: BaseBundle:Event:rechercheEventAjax }
+MyEvents:
+    path:     /MyEvents
+    defaults: { _controller: BaseBundle:Event:MyEvents }
+archievey:
+    path:     /archievey
+    defaults: { _controller: BaseBundle:Event:archievey }
+ListeParticipants:
+    path:     /ListeParticipants
+    defaults: { _controller: BaseBundle:Event:ListeParticipants }
+sandbox_pdfexample:
+    path:     /pdf-example
+    defaults: { _controller: BaseBundle:Event:pdf }
+sandbox_pdfexamplePart:
+    path:     /pdf-examplePart
+    defaults: { _controller: BaseBundle:Participation:pdf }
+favori:
+    path:     /favori
+    defaults: { _controller: BaseBundle:Favori:ajouterFav}
+MesFavories:
+    path:     /MesFavories
+    defaults: { _controller: BaseBundle:Favori:MesFavories}
+
+
+
+

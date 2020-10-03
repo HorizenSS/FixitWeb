@@ -1,0 +1,32 @@
+{% extends 'Front.html.twig' %}
+
+
+{% block body %}
+    <!--<h3 class="tittle1">Ajouter un nouvel évènement</h3>-->
+<div class="login">
+    <div class="main-agileits">
+        <div class="form-w3agile form1">
+            <h3 class="tittle1">Ajouter un nouvel évènement</h3>
+    {{ form(form) }}
+    {{ form_errors(form) }}
+        </div>
+    </div>
+</div>
+
+    <!--  Notifications Plugin    -->
+    <script src="{{ asset('Back/assets/js/bootstrap-notify.js')}}"></script>
+    <script type="text/javascript">
+        $(window).on('load',function(){
+            $.notify({
+                // options
+                title: '<strong>Notification :</strong><br>' ,
+                message: 'Veuillez choisir une date > à la date d aujourd hui'
+            },{
+                // settings
+                type: 'warning'
+            });
+        });
+    </script>
+
+{% endblock %}
+

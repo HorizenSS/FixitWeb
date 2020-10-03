@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Liste des évènements</title>
+    <style>
+        table{
+            font-family: Brush Script MT, Brush Script Std, cursive;
+            text-align: center;
+            alignment: center;
+            border-bottom: 1px solid #AAAAAA;
+        }
+        h2{
+            font-family: Brush Script MT, Brush Script Std, cursive
+        }
+        header {
+            color: #777777;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #AAAAAA;
+        }
+        footer {
+            color: #777777;
+            width: 100%;
+            height: 30px;
+            position: absolute;
+            bottom: 0;
+            border-top: 1px solid #AAAAAA;
+            padding: 8px 0;
+            text-align: center;
+        }
+        body {
+            position: relative;
+            width: 21cm;
+            height: 29.7cm;
+            margin: 0 auto;
+            color: #555555;
+            background: #FFFFFF;
+            font-size: 14px;
+            font-family: SourceSansPro;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<header>
+    <div id="company">
+        <h2 style="color: #531A13" class="name" > <strong>Souk El Madina</strong> </h2>
+        <div>Site web :<a href="#">www.soukelmadina.com</a></div>
+        <div style="color: #777777">Numero de telephone :56 10 32 22</div>
+        <div>Email :<a href="mailto:company@example.com">soukelmadina@souk.tn</a></div>
+    </div>
+</header>
+
+<main>
+
+    <div>
+        <br>
+        <h1 style="color: #E9967A ; font-family: Brush Script MT, Brush Script Std, cursive ; text-align: center" >Liste des Participants de l'evenement -<strong>{{ event.nom }}</strong>- </h1>
+        <br><br><br>
+        <div style="text-align: center">
+        <table style="font-size:150% "><thead>
+            <tr>
+                <th  style="color: #78281F   ; text-align: center"    >     Participants </th>
+                <th  style="color: #78281F   ; text-align: center"    >     Email </th>
+                <th  style="color: #78281F   ; text-align: center"    >     Telephone </th>
+            </tr></thead>
+            {% for participant in participants %}
+
+                <tr>
+                    <td style="text-align: center">{{ participant.getUser() }}</td>
+                    <td style="text-align: center">{{ participant.getUser().getEmail() }}</td>
+                    <td style="text-align: center">{{ participant.getUser().getTelephone() }}</td>
+                </tr>
+
+            {% endfor %}
+
+        </table>
+        </div>
+    </div>
+
+</main>
+
+<footer>
+    With   <img src="http://localhost/medina/web/images/heart.jpg"/>
+    <br>
+    All rights reserved <strong>Souk El Madina</strong> 2017-2018.
+</footer>
+
+</body>
+</html>

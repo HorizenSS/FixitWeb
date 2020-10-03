@@ -1,0 +1,135 @@
+{% extends 'Front.html.twig' %}
+
+
+
+{% block body %}
+
+    <div id="divDetailEvent">
+        <div class="container">
+            <h3 class="tittle">Acceuil/Evènement</h3>
+            <br>
+            <span></span>
+
+        <div class="button">
+
+            <a href="{{ path('archieve') }}" class="buttonE">Archieve des évènements</a>
+            <a href="{{ path('MyEvents') }}" class="buttonE"> Mes évènements</a>
+            <a href="{{ path('MesFavories') }}" class="buttonE"> Mes favoris</a>
+        </div>
+        </div>
+    </div>
+    <br>
+    <button class="buttonE">
+        <a href="{{ path('ajoutEvent') }}" class="buttonE">+ Ajouter un nouvel évènement</a>
+    </button>
+    <br>
+    <button class="buttonE">
+        <a href="{{ path('rechercheEvent' )}}" class="buttonE">Rechercher un évènement    </a>
+    </button>
+    <div class="new-arrivals-w3agile">
+      <div class="container">
+
+        {% for event in event %}
+        <div class="col-md-3 cap-left simpleCart_shelfItem">
+            <div class="grid-arr">
+                <div  class="grid-arrival">
+
+                    <figure>
+                        <a href="#">
+                            <div class="grid-img">
+                                <img  src="{{ asset( 'EventsImages/' ~ event.image) }}" class="img-responsive" alt="">
+                            </div>
+                            <div class="grid-img">
+                                <img  src="{{ asset( 'EventsImages/' ~ event.image) }}" class="img-responsive"  alt="">
+                            </div>
+                        </a>
+                    </figure>
+                </div>
+                <div class="block">
+                    <div class="starbox small ghosting"> </div>
+                </div>
+                <div class="women">
+                    <h6><a href="{{ path('detailEvent',{'idEvent':event.idEvent}) }}">{{ event.nom }}</a></h6>
+                    <p ><em class="item_price">{{ event.lieu }} </em></p>
+                    <p>{{ event.date|date("d/m/y")}}</p>
+
+                    <a href="{{ path('favori',{'idEvent':event.idEvent}) }}" id="champ" data-text="Favori" class="my-cart-b">Favori</a>
+                </div>
+            </div>
+
+
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+
+
+    <div class="navigation" align="center">
+        {{ knp_pagination_render(event) }}
+    </div>
+<br><br><br>
+    <style>
+        .buttonE{
+            font-size: 1em;
+            background: #E9967A;
+            color: #fff;
+            padding: 1em 2em;
+            text-decoration: none;
+            margin-top: 2em;
+        }
+        #divDetailEvent{
+            text-align: center;
+            min-height: 20px;
+            background-size:cover;
+            padding: 10em 0;
+            height: 50px;
+            width: 1680px;
+            display: table;
+            background: url("{{ asset('images/backEvent.jpg') }}") no-repeat fixed 0px 0px;
+        }
+
+        .alert-minimalist {
+            background-color: rgb(241, 242, 240);
+            border-color: rgba(149, 149, 149, 0.3);
+            border-radius: 3px;
+            color: rgb(149, 149, 149);
+            padding: 10px;
+        }
+        .alert-minimalist > [data-notify="icon"] {
+            height: 50px;
+            margin-right: 12px;
+        }
+        .alert-minimalist > [data-notify="title"] {
+            color: rgb(100, 30, 22);
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 140%;
+        }
+        .alert-minimalist > [data-notify="message"] {
+            font-size: 140%;
+        }
+    </style>
+    <script src="{{ asset('Back/assets/js/bootstrap-notify.js')}}"></script>
+    <script type="text/javascript">
+        $(window).on('load',function(){
+            $.notify({
+                icon: 'https://lh6.ggpht.com/16QhXfGTDetD-TN-T7NbR_NegwCF1O8ICU2W4yyXXDcHl6OWUJITegq9M_uRySaeK_E=w300',
+                title: 'Bonjour',
+                message: 'Vous etes le bienvenue.'
+            },{
+                type: 'minimalist',
+                delay: 5000,
+                icon_type: 'image',
+                template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+                '<img data-notify="icon" class="img-circle pull-left">' +
+                '<span data-notify="title">{1}</span>' +
+                '<span data-notify="message">{2}</span>' +
+                '</div>'
+            });
+        });
+
+    </script>
+
+{% endblock %}

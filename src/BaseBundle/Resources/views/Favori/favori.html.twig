@@ -1,0 +1,70 @@
+{% extends 'Front.html.twig' %}
+
+{% block body %}
+    <style>
+        #divDetailEvent{
+            text-align: center;
+            min-height: 20px;
+            background-size:cover;
+            padding: 10em 0;
+            height: 50px;
+            width: 1680px;
+            display: table;
+            background: url("{{ asset('images/souv.jpg') }}") no-repeat fixed 0px 0px;
+        }
+    </style>
+    <div id="divDetailEvent">
+        <div class="container">
+            <h3 class="tittle">Acceuil/Evènement/Favoris</h3>
+            <br>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="new-arrivals-w3agile">
+        <div class="container">
+
+
+{% for favori in favori %}
+        {% for event in event %}
+{% if favori.user == user %}
+            {% if favori.event.idEvent ==  event.idEvent %}
+                <div class="col-md-3 cap-left simpleCart_shelfItem">
+                    <div class="grid-arr">
+                        <div  class="grid-arrival">
+
+                            <figure>
+                                <a href="#">
+                                    <div class="grid-img">
+                                        <img  src="{{ asset( 'EventsImages/' ~ event.image) }}" class="img-responsive" alt="">
+                                    </div>
+                                    <div class="grid-img">
+                                        <img  src="{{ asset( 'EventsImages/' ~ event.image) }}" class="img-responsive"  alt="">
+                                    </div>
+                                </a>
+                            </figure>
+                        </div>
+                        <div class="block">
+                            <div class="starbox small ghosting"> </div>
+                        </div>
+                        <div class="women">
+                            <h6><a href="{{ path('detailEvent',{'idEvent':event.idEvent}) }}">{{ event.nom }}</a></h6>
+                            <p ><em class="item_price">{{ event.lieu }} </em></p>
+                            <p>{{ event.date|date("d/m/y")}}</p>
+
+                            <a href="{{ path('favori',{'idEvent':event.idEvent}) }}" data-text="Favori" class="my-cart-b">Favori</a>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            {% endif %}
+            {% endif %}
+    {% endfor %}
+{% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}
