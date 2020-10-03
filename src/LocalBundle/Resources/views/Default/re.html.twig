@@ -1,0 +1,52 @@
+{% extends 'Front.html.twig' %}
+
+{% block container %}
+    <div class="card">
+        <div class="card-header">
+            <h5>recherche par nom</h5>
+            <form method="post" action="{{ path('recherchef') }}">
+                <input type="text" class="form-control" placeholder="recherche" name="recherche" id="recherche"/>
+
+            </form>
+        </div>
+        <div class="card-block table-border-style">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>id</th>
+                        <th>nom </th>
+                        <th>expire le</th>
+                        <th>Description</th>
+                        <th>prix</th>
+                        <th>proprietaire</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+    {% for annonce in annonces %}
+
+
+
+            <tr class="table-success">
+            <th scope="row">{{ annonce.id }}</th>
+            <td>{{ annonce.enddate | date }}</td>
+            <td>{{ annonce.owner }}</td>
+            <td>{{ annonce.nom}}</td>
+            <td>{{ annonce.description }}</td>
+            <td>{{ annonce.prix }}</td>
+
+
+
+                    </tr>
+    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

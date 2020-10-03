@@ -1,0 +1,288 @@
+{% extends 'Front.html.twig' %}
+
+{% block script %}
+    <style>
+        .buttonE{
+            font-size: 1em;
+            background: #E9967A;
+            color: #fff;
+            padding: 1em 2em;
+            text-decoration: none;
+            margin-top: 2em;
+        }
+        #divDetailEvent{
+            text-align: center;
+            min-height: 50px;
+            background-size:cover;
+            padding: 10em 0;
+            height: 50px;
+            width: 1680px;
+            display: table;
+            background: url("{{ asset('images/back.jpg') }}") no-repeat fixed 0px 0px;
+        }
+        #stars span {
+            font-size:2em;
+            cursor: pointer;
+        }
+
+        #stars span.selected {
+            color:Gold;
+        }
+    </style>
+
+    <div id="divDetailEvent">
+        <h3 class="tittle">Détails local</h3>
+        <div class="button">
+            <!--  <a href="#" class="button1"> Retourner vers la page d'acceuil</a>
+              <a href="#" class="button1"> Quick View</a> -->
+        </div>
+    </div>
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+    <link rel="stylesheet" type="text/css" src="rating.css" />
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="rating.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bundles/starrating/js/rating.js') }}"></script>
+{% endblock %}
+{% block container %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('local_homepage') }}">Acceuil</a></li>
+        <li><a href="{{ path('mes_annonces',{'id':app.user.id}) }}">Mes annonces</a></li>
+        <li class="active" ></li>
+
+    </ol>
+
+
+
+    <div class="new-arrivals-w3agile">
+    <div class="container">
+        {{ socialButtons() }}
+    <div class="single-wl3">
+    <div class="container">
+        <div class="single-grids">
+            <div class="col-md-9 single-grid">
+                <div class="single-top">
+                    <div class="single-left">
+                        <div class="flexslider">
+                            <ul class="slides">
+                                <li data-thumb="images/si.jpg">
+                                    <div class="thumb-image">  <img src="{{ asset( 'uploads/images/' ~ annonce.image) }}"  data-imagezoom="true" class="img-responsive">
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="single-right simpleCart_shelfItem">
+                        <div class="description">
+                            <h6>Titre:</h6>
+                                <p><span> {{ annonce.nom }}  </span> </p>
+
+                        </div>
+                        <div class="description">
+                            {% if annonce.type == 1 %}
+                                <h6>Type :</h6>
+                            <p><span> demande </span> </p>
+                                {% else %}
+                                    <h6>Type :</h6>
+                                    <p><span> offre</span> </p>
+                            {% endif %}
+                        </div>
+                        <div class="description">
+                            <h6>Description:</h6>
+                            <p><span> {{ annonce.description }}  </span> </p>
+
+                        </div>
+                        <h6>Prix:</h6>
+                        <p class="price item_price">{{ annonce.prix }}dt</p>
+
+                        {% if annonce.type == 1 %}
+
+                        <div class="color-quality">
+                        <h6>Date debut :</h6><p>{{ annonce.startdate|date("d/m/y") }}</p>
+                        <h6>Date fin :</h6><p>{{ annonce.enddate|date("d/m/y") }}</p>
+
+
+
+
+                        {% endif %}
+                        </div>
+
+                        <div class="color-quality">
+                            <h6>Propriétaire:</h6><p>{{ annonce.owner }}</p>
+
+                        </div>
+
+                    </div>
+
+
+
+                        <div class="block">
+                        <div class="starbox small ghosting">  </div>
+                        </div>
+                        <div class="women">
+
+                        {% if okk ==0 %}
+                            {% if annonce.owner != app.user.username %}
+
+                            <div class="rating1">
+
+
+                                <div class="form_row">
+                                    <label class="required">Rate</label>
+                                    {{ form_start(form) }}
+                                    {{ form_widget(form.rating) }}
+
+                                        {{ form_end(form) }}
+                                    </select>
+                                </div>
+                                <script>
+                                    function stars_hover(el) {
+                                        /* display this star and the previous stars in gold color */
+                                        el
+                                            .addClass('selected')
+                                            .prevAll()
+                                            .addClass('selected')
+                                        ;
+
+                                        /* display the next stars in black color */
+                                        el
+                                            .nextAll()
+                                            .removeClass('selected')
+                                        ;
+                                    }
+
+                                    /* reset the display of the stars from the <select> value */
+                                    function stars_out(el) {
+                                        stars_hover(
+                                            $('#stars span[data-value=' +  $('#tag_rate').val() + ']')
+                                        );
+                                    }
+
+                                    function stars_set(el) {
+                                        $('#tag_rate')
+                                            .val(el.data('value'));
+                                    }
+
+                                    $(function() {
+                                        $('#tag_rate')
+                                            .after(
+                                                $('<span id="stars"></span>')
+                                                    .append(
+                                                        $('<span>★</span>')
+                                                            .attr('data-value', 1),
+                                                        $('<span>★</span>')
+                                                            .attr('data-value', 2),
+                                                        $('<span>★</span>')
+                                                            .attr('data-value', 3),
+                                                        $('<span>★</span>')
+                                                            .attr('data-value', 4),
+                                                        $('<span>★</span>')
+                                                            .attr('data-value', 5)
+                                                    )
+                                            )
+                                        /* uncomment this to hide the <select> and display only stars */
+                                        /*.hide()*/
+                                        ;
+
+                                        $('#stars span')
+                                            .hover(
+                                                function() {stars_hover($(this));}
+                                            )
+                                            .click(
+                                                function() {stars_set($(this));}
+                                            );
+
+                                        $('#stars')
+                                            .mouseleave(
+                                                function() {stars_out($(this));}
+                                            );
+                                    });
+                                </script>
+                        </div>
+                        {% endif %}
+
+                        {% else %}
+                            {% if rate.rating == 0 %}
+                                <i style="color: gold" class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+
+                            {% endif %}
+                            {% if rate.rating == 1 %}
+                                <i style="color: gold" class="fa fa-star fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+
+                            {% endif %}
+                            {% if rate.rating == 2 %}
+                                <i style="color: gold" class="fa fa-star fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+
+                            {% endif %}
+                            {% if rate.rating == 3 %}
+                                <i style="color: gold" class="fa fa-star fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+
+                            {% endif %}
+                            {% if rate.rating == 4 %}
+                                <i style="color: gold" class="fa fa-star fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+
+                            {% endif %}
+                            {% if rate.rating == 5 %}
+                                <i style="color: gold" class="fa fa-star fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star fa-2x" aria-hidden="true"></i>
+                                <i style="color: gold" class="fa fa-star fa-2x" aria-hidden="true"></i>
+                            {% endif %}
+                          {% endif %}
+
+
+                        {% if annonce.owner != app.user.username %}
+                            <a href="{{path ('envoisms',{"id":annonce.id} )}}" class="callout-warning">CHOISIR ANNONCE</a>
+                            {% if signaler=='false' %}
+                                                <a href="{{ path('SignalerAnnonces',{'id':annonce.id}) }}" class="btn btn-danger btn-sm popup-with-move-anim">
+                                                    Signaler
+                                                </a>
+
+                                    </form>
+                                </div>
+
+                             {% endif %}
+                         {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                    {% if not(annonce.approuve) %}
+                        <a class="btn btn-success btn-block btn-xs" href="{{ path('Approuver_annonce', {'id': annonce.id}) }}"><i class="fa fa-check"> Approuver</i></a>
+                    {%endif%}
+                    {%endif%}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{%  endblock %}

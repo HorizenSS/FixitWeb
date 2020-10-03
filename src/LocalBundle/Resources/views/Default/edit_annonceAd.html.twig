@@ -1,0 +1,81 @@
+
+
+{% extends 'Back.html.twig' %}
+
+{% block container %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('local_homepage') }}">Home</a></li>
+        <li><a href="{{ path('mes_annonces',{'id':app.user.id}) }}">Mes annonces</a></li>
+        <li class="active" >Modifier  annonce</li>
+
+    </ol>
+    {{ form_start(Form) }}
+
+<div id="type"  >
+    <h4>Veuillez choisir le titre de l'annonce  </h4>
+
+    <div class="form-group">
+        {{ form_widget(Form.nom,{'attr': {'class':'form-control placeholder-no-fix','required' : 'true','id': 'nom'}}) }}
+    </div>
+
+    <div id="type"  >
+        <h4>Veuillez choisir la description de l'annonce  </h4>
+
+        <div class="form-group">
+            {{ form_widget(Form.description,{'attr': {'class':'form-control placeholder-no-fix','required' : 'true','id': 'description'}}) }}
+        </div>
+
+
+
+        <div id="type"  >
+        {{ form_widget(Form.type, {'attr': {'placeholder': 'Choisir votre image','class':'form-control placeholder-no-fix','required' : 'true'}}) }}
+        {{ form_errors(Form.type) }}
+    </div>
+    <div id="date">
+
+        {{ form_widget(Form.startdate, {'attr': {'placeholder': 'Choisir votre image','class':'form-control placeholder-no-fix','required' : 'true'}}) }}
+        {{ form_errors(Form.startdate) }}
+
+        {{ form_widget(Form.enddate, {'attr': {'placeholder': 'Choisir votre image','class':'form-control placeholder-no-fix','required' : 'true'}}) }}
+        {{ form_errors(Form.enddate) }}
+
+    </div>
+    Prix
+    <div class="input-group">
+
+        <span class="input-group-addon">TND</span>
+        {{ form_widget(Form.prix, {'attr': {'placeholder': 'Proposer votre prix en dinar','class':'form-control placeholder-no-fix','required' : 'true'}}) }}
+        {{ form_errors(Form.prix) }}
+
+    </div>
+
+
+
+    <div class="col-xs-offset-2 ">
+        {{ form_widget(Form.image, {'attr': {'placeholder': 'Choisir votre image','class':'btn btn-info btn-lg','required' : 'true'}}) }}
+        {{ form_errors(Form.image) }}
+
+    </div>
+
+    {{ form_end(Form) }}
+    <script>
+
+
+        $(document).ready(function(){
+            $('#type').on('change', function() {
+
+                if($('#date').is(':visible')){
+                    $("#date").hide();
+                }
+
+                else
+                {
+                    $("#date").show();
+                }
+            });
+        });
+
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% xlsdocument %}
+    {% xlssheet 'Worksheet' %}
+        {% xlsrow %}
+            {% xlscell { style: { font: { size: '11' } } } %}#{% endxlscell %}
+            {% xlscell { style: { font: { size: '11' } } } %}Full_Name{% endxlscell %}
+            {% xlscell { style: { font: { size: '11' } } } %}Email{% endxlscell %}
+            {% xlscell { style: { font: { size: '11' } } } %}Subject{% endxlscell %}
+            {% xlscell { style: { font: { size: '11' } } } %}Services{% endxlscell %}
+            {% xlscell { style: { font: { size: '11' } } } %}Date{% endxlscell %}
+        {% endxlsrow %}
+        {% for i in Contact %}
+            {% xlsrow %}
+            {% xlscell %}{{ i.id }}{% endxlscell %}
+            {% xlscell %}{{ i.FullName }}{% endxlscell %}
+            {% xlscell %}{{ i.email  }}{% endxlscell %}
+            {% xlscell %}{{ i.subject }}{% endxlscell %}
+            {% xlscell %}{{ i.services}}{% endxlscell %}
+            {% xlscell %}{{ i.DateEnvoi | date('d-m-y') }}{% endxlscell %}
+            {% endxlsrow %}
+        {% endfor %}
+    {% endxlssheet %}
+{% endxlsdocument %}
+

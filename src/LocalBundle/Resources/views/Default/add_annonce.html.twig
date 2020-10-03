@@ -1,0 +1,128 @@
+
+
+
+{% extends 'Front.html.twig' %}
+
+
+
+{% block container %}
+<div class="w3l-media">
+    {{ form_start(Form) }}
+
+<div class="content">
+    <!--login-->
+    <div class="login">
+        <div class="main-agileits">
+            <div class="form-w3agile form1">
+
+    <div id="type"  >
+        <h4>Veuillez choisir le type d'annonce  </h4>
+
+        {{ form_widget(Form.type, {'attr': {'placeholder': 'Choisir votre image','class':'form-control placeholder-no-fix','required' : 'true'}}) }}
+        {{ form_errors(Form.type) }}
+    </div>
+                <div id="type"  >
+                    <h4>Veuillez choisir le titre de l'annonce  </h4>
+
+                <div class="form-group">
+                {{ form_widget(Form.nom,{'attr': {'class':'form-control placeholder-no-fix','required' : 'true','id': 'nom'}}) }}
+                    {{ form_errors(Form.nom) }}
+            </div>
+
+                    <div id="type"  >
+                        <h4>Veuillez choisir la description de l'annonce  </h4>
+
+            <div class="form-group">
+            {{ form_widget(Form.description,{'attr': {'class':'form-control placeholder-no-fix','required' : 'true','id': 'description'}}) }}
+                {{ form_errors(Form.description) }}
+            </div>
+
+
+
+
+
+    <div id="date">
+        <div class="form-group">
+            <h4>Veuillez choisir la date de debut  </h4>
+        {{ form_widget(Form.startdate,  {'attr': {'placeholder': 'Choisir la date debut','class':'form-control placeholder-no-fix','id': 'datetimepicker6'}}) }}
+
+            {{ form_errors(Form.startdate) }}
+
+        </div>
+        <div  class="form-group">
+            <h4>Veuillez choisir la date d'expiration </h4>
+            {{ form_widget(Form.enddate, {'attr': {'placeholder': 'Choisir la date fin','class':'form-control placeholder-no-fix', 'id': 'datetimepicker7'}}) }}
+
+            {{ form_errors(Form.enddate) }}
+
+        </div>
+    </div>
+         <div class="key">
+        <h4>Veuillez introduire votre prix </h4>
+
+        {{ form_widget(Form.prix, {'attr': {'placeholder': 'Proposer votre prix en dinar','class':'form-control placeholder-no-fix','required' : 'true'}}) }}
+        {{ form_errors(Form.prix) }}
+             <span class="input-group-addon">TND</span>
+    </div>
+
+
+
+<div class="container-fluid" align="center">
+
+    {{ form_widget(Form.image, {'attr': {'placeholder': 'Choisir votre image','class':'btn btn-info btn-lg','required' : 'true'}}) }}
+    {{ form_errors(Form.image) }}
+
+</div>
+    <div><h4>Veuillez choisir un de vos locaux </h4></div>
+    {{ form_widget(Form.id_local, {'attr': {'placeholder': 'Veuillez choisir un de vos locaux','class':'form-control placeholder-no-fix','required' : 'true'}}) }}
+    {{ form_errors(Form.id_local) }}
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    {{ form_end(Form) }}
+        </div>
+    <script>
+
+
+        $(document).ready(function(){
+            $('#type').on('change', function() {
+
+                if($('#date').is(':visible')){
+                     $("#date").hide();
+
+                }
+
+                else
+                {
+                    $("#date").show();
+                }
+            });
+        });
+
+    </script>
+
+
+
+
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker6 input').datetimepicker();
+                $('#datetimepicker7 input').datetimepicker({
+                    useCurrent: false //Important! See issue #1075
+                });
+                $("#datetimepicker6").on("dp.change", function (e) {
+                    $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+                });
+                $("#datetimepicker7").on("dp.change", function (e) {
+                    $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+                });
+            });
+    </script>
+
+
+{% endblock %}
